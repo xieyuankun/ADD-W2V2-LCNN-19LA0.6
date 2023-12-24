@@ -36,8 +36,8 @@ def normalization(orign_data):
     
 for part_ in ["train","dev","eval"]:
     asvspoof_raw = dataset.ASVspoof2019Raw("LA", "/home/chenghaonan/xieyuankun/data/asv2019",
-                                           "/home/chenghaonan/xieyuankun/singing_detection/data/asv2019/ASVspoof2019_LA_cm_protocols/", part=part_)
-    target_dir = os.path.join("/home/chenghaonan/xieyuankun/singing_detection/data/asv2019/preprocess_xls-r", part_,
+                                           "/home/chenghaonan/xieyuankun/data/asv2019/ASVspoof2019_LA_cm_protocols/", part=part_)
+    target_dir = os.path.join("/home/chenghaonan/xieyuankun/data/asv2019/preprocess_xls-r", part_,
                               "xls-r")
     processor =  Wav2Vec2FeatureExtractor.from_pretrained("facebook/wav2vec2-xls-r-300m")
     model = Wav2Vec2Model.from_pretrained("facebook/wav2vec2-xls-r-300m").cuda()

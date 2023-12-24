@@ -40,8 +40,7 @@ def initParams():
                         help="ASVspoof ratio in a training batch, the other should be augmented")
 
     # Dataset prepare
-    parser.add_argument("--feat", type=str, help="which feature to use", default='xls-r',
-                        choices=["CQCC", "LFCC"])
+    parser.add_argument("--feat", type=str, help="which feature to use", default='xls-r')
     parser.add_argument("--feat_len", type=int, help="features length", default=201)
     parser.add_argument('--pad_chop', type=str2bool, nargs='?', const=True, default=False,
                         help="whether pad_chop in the dataset")
@@ -248,9 +247,6 @@ def train(args):
         feat_model.eval()
         with torch.no_grad():
             ip1_loader, tag_loader, idx_loader, score_loader = [], [], [], []
-            # with trange(2) as v:
-            # with trange(len(valDataLoader)) as v:
-            #     for i in v:
             for i in trange(0, len(valOriDataLoader), total=len(valOriDataLoader), initial=0):
                 try:
                     featOri, audio_fnOri, tagsOri, labelsOri= next(valOri_flow)
@@ -261,14 +257,12 @@ def train(args):
                 feat = featOri
                 tags = tagsOri
                 labels = labelsOri
-                # if i > 2: break
                 feat = feat.transpose(2, 3).to(args.device)
                 tags = tags.to(args.device)
                 labels = labels.to(args.device)
                 feat, tags, labels = shuffle(feat, tags, labels)
                 if args.model == 'ecapa':
                     feat = torch.squeeze(feat)
-                #feat = feat.squeeze(dim=1)
                 print(feat.shape)
                 feats, feat_outputs = feat_model(feat)
                 if args.base_loss == "bce":
@@ -290,7 +284,6 @@ def train(args):
                 desc_str = ''
                 for key in sorted(devlossDict.keys()):
                     desc_str += key + ':%.5f' % (np.nanmean(devlossDict[key])) + ', '
-                # v.set_description(desc_str)
                 print(desc_str)
                 scores = torch.cat(score_loader, 0).data.cpu().numpy()
                 labels = torch.cat(idx_loader, 0).data.cpu().numpy()
@@ -326,9 +319,6 @@ def train(args):
             break
         # if early_stop_cnt == 1:
         #     torch.save(feat_model, os.path.join(args.out_fold, 'anti-spoofing_feat_model.pt')
-
-        # print('Dev Accuracy of the model on the val features: {} % '.format(100 * feat_correct / total))
-
     return feat_model, loss_model
 
 

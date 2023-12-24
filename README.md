@@ -1,6 +1,6 @@
 # Wav2vec2-XLS-R-LCNN (19LA 0.6%EER)
 
-This repository is a baseline model supported to the paper [FSD dataset](https://github.com/xieyuankun/FSD-Dataset)  .
+This repository is a baseline model supported to the paper [FSD dataset](https://arxiv.org/abs/2309.02232)  .
 
 The code sturcture is modified on the [ASVspoof2021_AIR](https://github.com/yzyouzhang/ASVspoof2021_AIR). 
 Thanks to You Zhang for contribution to the field of audio deepfake detection!
