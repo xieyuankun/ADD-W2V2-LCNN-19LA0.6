@@ -1,12 +1,12 @@
 # Wav2vec2-XLS-R-LCNN (19LA 0.6%EER)
 
-This repository is a baseline model support to the paper [FSD dataset](https://github.com/xieyuankun/FSD-Dataset)  .
+This repository is a baseline model supported to the paper [FSD dataset](https://github.com/xieyuankun/FSD-Dataset)  .
 
 The code sturcture is modified on the [ASVspoof2021_AIR](https://github.com/yzyouzhang/ASVspoof2021_AIR). 
 Thanks to You Zhang for contribution to the field of audio deepfake detection!
 
 
-### 1. Offline Data Preprocess 
+### 1. Offline Data Extraction
 ```
 python preprocess.py
 ```
@@ -22,7 +22,7 @@ possibly due to the characteristics of the 19 dataset where the artifacts of rep
 better distinguish between genuine and fake instances. 
 After offline processing with wav2vec, you will obtain features with a shape of (1, 201, 1024), 
 where 201 corresponds to the temporal dimension.
-## 2. Train model
+## 2. Train Model
 
 ```
 python main_train.py 
@@ -38,6 +38,6 @@ python generate_score.py
 python evaluate_tDCF_asvspoof19.py
 ```
 
-We also provided pretrained model in `models_0.63/try/anti-spoofing_feat_model.pt`
+We also provided a pretrained model in `models_0.63/try/anti-spoofing_feat_model.pt`
 
 The final test scores EER = 0.63572%,  min-tDCF = 0.01904
